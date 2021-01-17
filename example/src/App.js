@@ -2,19 +2,22 @@ import React, {useState} from 'react'
 import Modal from 'rmodal-component';
 import styled from 'styled-components';
 import ModalProps from "./props";
+import 'rmodal-component/dist/index.css'
 
 const App = () => {
     const [show, setShow] = useState(false);
     const [smShow, setSmShow] = useState(false);
+    const [show2, setShow2] = useState(false);
 
     return (
         <div className="container mt-3 mt-lg-5">
-            <h1>React Modal Component (draggable drawer in mobile devices)</h1>
-            <p>A great package to easily create beautiful modal in React.</p>
-            <p>In desktop devices in modal and in mobile device is draggable drawer.</p>
-            <p>In mobile device can close modal with dragging like instagram modals.</p>
-            <p>Close the modal by dragging the top of the modal in mobile devices.</p>
-            <p className="mt-3 text-success">You can apply your own styles based on the class names.</p>
+            <h1 style={{'fontSize':'32px'}}>React Modal Component (draggable drawer in mobile devices)</h1>
+            <p className="mt-5">✔️ A great package to easily create beautiful modal in React.</p>
+            <p>✔️ In desktop devices in modal and in mobile device is draggable drawer.</p>
+            <p>✔️ In mobile device can close modal with dragging like instagram modals.</p>
+            <p>✔️ Close the modal by dragging the top of the modal in mobile devices.</p>
+            <p className="mt-3 text-success">✔️ You can apply your own styles based on the class names.</p>
+            <p className="mt-3 text-success">✔️ Lock Body scroll when modal opened.</p>
 
 
             <Section>
@@ -53,6 +56,21 @@ const App = () => {
                         <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
                     </Modal>
 
+                    <button type="button" onClick={() => setShow2(true)} className="btn btn-secondary ml-4">open modal with body scroll lock</button>
+
+                    <Modal show={show2} onClose={() => setShow2(false)} lockBodyScroll={true} smModal={true} modalTitle={"modal with body scroll lock"}>
+
+                        <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                        <p>In publishing and graphic design, Lorem ipsum is a placeholder text commonly used to demonstrate the visual form of a document or a typeface without relying on meaningful content.</p>
+                    </Modal>
+
 
                 </div>
             </Section>
@@ -75,8 +93,11 @@ const App = () => {
                 <div className="mt-3">
                     <h4 className="mb-3">1 - Import component</h4>
                     <Pre>
-                        <code>
+                        <code className="d-block">
                             import Modal from 'rmodal-component';
+                        </code>
+                        <code className="d-block">
+                            import 'rmodal-component/dist/index.css'
                         </code>
                     </Pre>
                 </div>

@@ -1,8 +1,7 @@
-import React, {useRef, useEffect, useState} from 'react';
-import styled from 'styled-components';
-import {SlideInBottomAnimate, SlideInBottomAnimateMobile, SlideOutBottomAnimate, SlideOutBottomAnimateMobile} from "./components/animations";
+import React, {useRef, useEffect} from 'react';
+import './style.scss'
 
-const Portal = ({show, children, onClose, modalTitle, smModal = false}) => {
+const Portal = ({show, children, onClose, modalTitle, smModal = false, lockBodyScroll = false}) => {
     const containerRef = useRef('');
     const bodyRef = useRef('');
     const contentRef = useRef('');
@@ -21,6 +20,9 @@ const Portal = ({show, children, onClose, modalTitle, smModal = false}) => {
         containerRef.current.classList.remove('show-modal');
         backdropRef.current.classList.remove('in');
         bodyRef.current.classList.add('slide-out');
+
+        const root = document.getElementsByTagName('html')[0];
+        root.classList.remove('html-modal-open');
 
         setTimeout(() => {
             onClose(true);
@@ -83,17 +85,27 @@ const Portal = ({show, children, onClose, modalTitle, smModal = false}) => {
         }
     });
 
+    useEffect(() => {
+        const root = document.getElementsByTagName('html')[0];
+
+        if (show && lockBodyScroll) {
+            root.classList.add('html-modal-open');
+        } else {
+            root.classList.remove('html-modal-open');
+        }
+    }, [show]);
+
     return (
-        <Container ref={containerRef} className="r-modal-component">
-            <Backdrop ref={backdropRef} onClick={(e) => handleClose(e)} className={"fade " + (show ? 'in' : '')}/>
+        <div ref={containerRef} className="rmodal-component">
+            <div ref={backdropRef} onClick={(e) => handleClose(e)} className={"rmc-back-drop fade " + (show ? 'in' : '')}/>
 
-            <Body ref={bodyRef} role="dialog" className={'modal-dialog-scrollable bottom ' + (show ? 'show-modal slide-in ' : 'slide-out ') +(smModal ? 'modal-sm ' : '')}>
-                <Dialog className="rmc-dialog">
-                    <DialogContent className="rmc-dialog-content" ref={contentRef}>
-                        <Header ref={headerRef} className="rmc-header">
-                            <CloseLine className="rmc-header-close-line"/>
+            <div ref={bodyRef} role="dialog" className={'rmc-body modal-dialog-scrollable bottom ' + (show ? 'show-modal slide-in ' : 'slide-out ') + (smModal ? 'modal-sm ' : '')}>
+                <div className="rmc-dialog">
+                    <div className="rmc-dialog-content" ref={contentRef}>
+                        <div ref={headerRef} className="rmc-header">
+                            <span className="rmc-header-close-line"/>
 
-                            <ModalClose className="rmc-header-close" onClick={(e) => handleClose(e)}>
+                            <button className="rmc-header-close" onClick={(e) => handleClose(e)}>
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.89 11.89">
                                     <g id="Layer_2" data-name="Layer 2">
                                         <g id="Layer_2-2" data-name="Layer 2">
@@ -102,19 +114,19 @@ const Portal = ({show, children, onClose, modalTitle, smModal = false}) => {
                                         </g>
                                     </g>
                                 </svg>
-                            </ModalClose>
+                            </button>
 
                             <h4 className="rmc-title">{modalTitle}</h4>
-                        </Header>
+                        </div>
 
 
-                        <DialogBody className="rmc-content">
+                        <div className="rmc-content">
                             {children}
-                        </DialogBody>
-                    </DialogContent>
-                </Dialog>
-            </Body>
-        </Container>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     )
 };
 
@@ -130,198 +142,3 @@ function Modal(props) {
 }
 
 export default Modal;
-
-// styles
-
-const Container = styled.div`
-    position: fixed;
-    z-index: 1050;
-    top: 0;
-`;
-
-const Backdrop = styled.div`
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1050;
-    background-color: #272c36;
-    
-    &.fade {
-        opacity: 0;
-        -webkit-transition: opacity .5s ease-in;
-        transition: opacity .5s ease-in;
-    }
-    
-    &.in {
-        opacity: .3;
-    }
-`;
-
-const ModalClose = styled.button`
-    background-color: transparent;
-    padding: 0;
-    margin: 0;
-    border: 0;
-    box-shadow: none;
-    position: absolute;
-    display: flex;
-    right: 24px;
-    z-index: 3;
-
-    @media (max-width: 768px) {
-        display: none;
-    }
-
-    svg {
-        width: 16px;
-        height: 16px;
-    }
-`;
-
-const DialogBody = styled.div`
-    position: relative;
-    padding: 0 24px;
-    
-    .modal-dialog-scrollable & {
-         @media (min-width: 768px) {
-             max-height: calc(100vh - 20rem);
-             overflow-y: auto;
-         }
-         
-         @media (max-width: 767px) {
-             max-height: calc(100vh - 116px);
-             overflow-y: auto;
-             padding-left: 16px;
-             padding-right: 16px;
-         }
-    }
-`;
-
-const DialogContent = styled.div`
-    position: relative;
-    background-color: #fff;
-    outline: 0;
-    width: 100%;
-    -webkit-box-shadow: 0 4px 4px rgba(0,0,0,.12), 0 0 10px rgba(0,0,0,.06);
-    box-shadow: 0 4px 4px rgba(0,0,0,.12), 0 0 10px rgba(0,0,0,.06);
-    border-radius: 16px;
-    padding-bottom: 24px;
-    
-    @media (min-width: 767px) {
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-    }
-
-    @media (max-width: 768px) {
-        border-radius: 24px 24px 0 0;
-        padding: 0;
-        bottom: unset;
-    }
-`;
-
-const Dialog = styled.div`
-    position: relative;
-    width: 100%;
-    height: 100%;
-`;
-
-const Body = styled.div`
-    display: block;
-    position: fixed;
-    z-index: 1050;
-    outline: 0;
-    left: 50%;
-    width: 100%;
-    max-width: 600px;
-    min-height: 200px;
-    
-    @media (max-width: 767px) {
-        left: 0;
-        bottom: 0;
-        height: auto;
-        max-width: 100%;
-    }
-    
-    &.modal-sm {
-        width: 370px;
-
-        @media (max-width: 768px) {
-            width: 100%;
-        }
-    }
-    
-    -webkit-animation-duration: .3s;
-    animation-duration: .3s;
-    -webkit-animation-fill-mode: forwards;
-    animation-fill-mode: forwards;
-        
-    @media (min-width: 767px) {
-        height: 100%;
-        max-height: calc(100vh - 8rem);
-        top: 50%;
-    }
-        
-    &.slide-in {
-        -webkit-animation-timing-function: ease-in-out;
-        animation-timing-function: ease-in-out;
-    
-        &.bottom {
-            animation-name: ${SlideInBottomAnimate};
-            
-            @media (max-width: 767px) {
-                animation-name: ${SlideInBottomAnimateMobile};
-            }
-        }
-    }
-    
-    &.slide-out {
-        -webkit-animation-timing-function: ease;
-        animation-timing-function: ease;
-        
-        &.bottom {
-            animation-name: ${SlideOutBottomAnimate};
-            
-            @media (max-width: 767px) {
-                animation-name: ${SlideOutBottomAnimateMobile};
-            }
-        }
-    }
-    
-    &.modal-dialog-scrollable {
-         display: flex;
-    }
-`;
-
-const Header = styled.div`
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    border-radius: 16px 16px 0 0;
-    background-color: #ffffff;
-    padding: 16px 0;
-    text-align: center;
-    
-    @media (max-width: 768px) {
-        flex-direction: column;
-    }
-    
-    .rmc-title {
-        margin-bottom: 0;
-    }
-`;
-
-const CloseLine = styled.span`
-    width: 36px;
-    border-radius: 40px;
-    border-bottom: 4px solid #dbdbdb;
-    margin-bottom: 24px;
-    
-    @media (min-width: 767px) {
-        display: none;
-    }
-`;

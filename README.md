@@ -21,13 +21,14 @@ npm install --save rmodal-component
 ```jsx
 import React, {useState} from 'react';
 import Modal from 'rmodal-component';
+import 'rmodal-component/dist/index.css'
 
 const Example = () => {
     const [show, setShow] = useState(false);
     
     return (
         <div>
-            <Modal show={show} onClose={() => setShow(false)} smModal={true} modalTitle={"modal Title"}>
+            <Modal show={show} onClose={() => setShow(false)} smModal={true} scrollLock={true} modalTitle={"modal Title"}>
                 ...
             </Modal>
         </div>

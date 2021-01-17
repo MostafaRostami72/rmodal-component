@@ -1,0 +1,257 @@
+.rmodal-component {
+    position: fixed;
+    z-index: 1050;
+    top: 0;
+
+    .rmc-back-drop {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1050;
+        background-color: #272c36;
+
+        &.fade {
+            opacity: 0;
+            -webkit-transition: opacity .5s ease-in;
+            transition: opacity .5s ease-in;
+        }
+
+        &.in {
+            opacity: .3;
+        }
+    }
+
+    .rmc-body {
+        display: block;
+        position: fixed;
+        z-index: 1050;
+        outline: 0;
+        left: 50%;
+        width: 100%;
+        max-width: 600px;
+        min-height: 200px;
+
+        @media (max-width: 767px) {
+            left: 0;
+            bottom: 0;
+            height: auto;
+            max-width: 100%;
+        }
+
+        &.modal-sm {
+            width: 370px;
+
+            @media (max-width: 768px) {
+                width: 100%;
+            }
+        }
+
+        -webkit-animation-duration: .3s;
+        animation-duration: .3s;
+        -webkit-animation-fill-mode: forwards;
+        animation-fill-mode: forwards;
+
+        @media (min-width: 767px) {
+            height: 100%;
+            max-height: calc(100vh - 8rem);
+            top: 50%;
+        }
+
+        &.slide-in {
+            -webkit-animation-timing-function: ease-in-out;
+            animation-timing-function: ease-in-out;
+
+            &.bottom {
+                animation-name: SlideInBottomAnimate;
+
+                @media (max-width: 767px) {
+                    animation-name: SlideInBottomAnimateMobile;
+                }
+            }
+        }
+
+        &.slide-out {
+            -webkit-animation-timing-function: ease;
+            animation-timing-function: ease;
+
+            &.bottom {
+                animation-name: SlideOutBottomAnimate;
+
+                @media (max-width: 767px) {
+                    animation-name: SlideOutBottomAnimateMobile;
+                }
+            }
+        }
+
+        .rmc-dialog {
+            position: relative;
+            width: 100%;
+            height: 100%;
+
+            .rmc-dialog-content {
+                position: relative;
+                background-color: #fff;
+                outline: 0;
+                width: 100%;
+                -webkit-box-shadow: 0 4px 4px rgba(0,0,0,.12), 0 0 10px rgba(0,0,0,.06);
+                box-shadow: 0 4px 4px rgba(0,0,0,.12), 0 0 10px rgba(0,0,0,.06);
+                border-radius: 16px;
+                padding-bottom: 24px;
+
+                @media (min-width: 767px) {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                }
+
+                @media (max-width: 768px) {
+                    border-radius: 24px 24px 0 0;
+                    padding: 0;
+                    bottom: unset;
+                }
+
+                .rmc-header {
+                    position: relative;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 100%;
+                    border-radius: 16px 16px 0 0;
+                    background-color: #ffffff;
+                    padding: 16px 0;
+                    text-align: center;
+
+                    @media (max-width: 768px) {
+                        flex-direction: column;
+                    }
+
+                    .rmc-title {
+                        margin-bottom: 0;
+                    }
+
+                    .rmc-header-close-line {
+                        width: 36px;
+                        border-radius: 40px;
+                        border-bottom: 4px solid #dbdbdb;
+                        margin-bottom: 24px;
+
+                        @media (min-width: 767px) {
+                            display: none;
+                        }
+                    }
+
+                    .rmc-header-close {
+                        background-color: transparent;
+                        padding: 0;
+                        margin: 0;
+                        border: 0;
+                        box-shadow: none;
+                        position: absolute;
+                        display: flex;
+                        right: 24px;
+                        z-index: 3;
+
+                        @media (max-width: 768px) {
+                            display: none;
+                        }
+
+                        svg {
+                            width: 16px;
+                            height: 16px;
+                        }
+                    }
+                }
+
+                .rmc-content {
+                    position: relative;
+                    padding: 0 24px;
+                }
+            }
+        }
+
+        &.modal-dialog-scrollable {
+            display: flex;
+
+            & .rmc-content {
+                @media (min-width: 768px) {
+                    max-height: calc(100vh - 20rem);
+                    overflow-y: auto;
+                }
+
+                @media (max-width: 767px) {
+                    max-height: calc(100vh - 116px);
+                    overflow-y: auto;
+                    padding-left: 16px;
+                    padding-right: 16px;
+                }
+            }
+        }
+    }
+}
+
+
+@keyframes SlideInBottomAnimate {
+    0% {
+        opacity: 0;
+        -webkit-transform: translate3d(-50%, 100%, 0);
+        transform: translate3d(-50%, 100%, 0)
+    }
+    to {
+        opacity: 1;
+        -webkit-transform: translate(-50%, 50%);
+        transform: translate(-50%, -50%);
+    }
+}
+
+@keyframes SlideInBottomAnimateMobile {
+    0% {
+        bottom: 0;
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0)
+    }
+    to {
+        bottom: 0;
+        opacity: 1;
+        -webkit-transform: translate(0, 0%);
+        transform: translate(0, 0%);
+    }
+}
+
+@keyframes SlideOutBottomAnimate {
+    0% {
+        bottom: 50%;
+        opacity: 1;
+        -webkit-transform: translate(-50%, 0%);
+        transform: translate(-50%, 0%);
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+        -webkit-transform: translate3d(-50%, 100%, 0);
+        transform: translate3d(-50%, 100%, 0)
+    }
+}
+
+@keyframes SlideOutBottomAnimateMobile {
+    0% {
+        bottom: 0;
+        opacity: 1;
+        -webkit-transform: translate(0, 0%);
+        transform: translate(0, 0%);
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0)
+    }
+}
+
+html.html-modal-open {
+    overflow: hidden;
+    -ms-touch-action: none;
+    touch-action: none;
+}

@@ -41,6 +41,13 @@ export default function ModalProps() {
                     <td>Reduces modal size</td>
                 </tr>
 
+                <tr>
+                    <td>lockBodyScroll</td>
+                    <td>false</td>
+                    <td>boolean</td>
+                    <td>set true for lock body scroll when modal opened</td>
+                </tr>
+
                 </tbody>
             </table>
         </div>
