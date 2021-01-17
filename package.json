@@ -1,10 +1,10 @@
 {
   "name": "rmodal-component",
-  "version": "1.0.0",
-  "description": "Made with create-react-library",
+  "version": "1.1.0",
+  "description": "React Modal Component (draggable drawer in mobile devices)",
   "author": "MostafaRostami72",
   "license": "MIT",
-  "repository": "MostafaRostami72/rmodal-component",
+  "repository": "https://github.com/MostafaRostami72/rmodal-component",
   "main": "dist/index.js",
   "module": "dist/index.modern.js",
   "source": "src/index.js",
