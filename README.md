@@ -1,7 +1,5 @@
 # rmodal-component
 
-> in developing
-
 [![NPM](https://img.shields.io/npm/v/rmodal-component.svg)](https://www.npmjs.com/package/rmodal-component) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Full Document
