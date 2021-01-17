@@ -9,6 +9,8 @@
 ## Demo
 -   [Demo](https://mostafarostami72.github.io/rmodal-component/)
 
+    <p>In desktop devices in modal and in mobile device is draggable drawer.</p>
+    <p>In mobile device can close modal with dragging like instagram modals.</p>
 
 ## Install
 
