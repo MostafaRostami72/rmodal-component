@@ -29,7 +29,7 @@ const Example = () => {
     
     return (
         <div>
-            <Modal show={show} onClose={() => setShow(false)} smModal={true} scrollLock={true} modalTitle={"modal Title"}>
+            <Modal show={show} onClose={() => setShow(false)} smModal={true} lockBodyScroll={true} modalTitle={"modal Title"}>
                 ...
             </Modal>
         </div>
