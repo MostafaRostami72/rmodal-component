@@ -1,15 +1,17 @@
 # rmodal-component
 
+   <p>✔️ In desktop devices in modal and in mobile device is draggable drawer.</p>
+   <p>✔️ In mobile device can close modal with dragging like instagram modals.</p>
+   <p>✔️ Lock Body scroll when modal opened.</p>
+    
+    
+    
 [![NPM](https://img.shields.io/npm/v/rmodal-component.svg)](https://www.npmjs.com/package/rmodal-component) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## Full Document
 -   [Document](https://mostafarostami72.github.io/rmodal-component/)
 ## Demo
 -   [Demo](https://mostafarostami72.github.io/rmodal-component/)
-
-    <p>✔️ In desktop devices in modal and in mobile device is draggable drawer.</p>
-    <p>✔️ In mobile device can close modal with dragging like instagram modals.</p>
-    <p>✔️ Lock Body scroll when modal opened.</p>
 
 ## Install
 

@@ -9,7 +9,7 @@ const Portal = ({show, children, onClose, modalTitle, smModal = false, lockBodyS
     const backdropRef = useRef('');
 
     const handleClose = (e) => {
-        if (containerRef.current.children.length) {
+        if (containerRef.current?.children.length) {
             for (let item of containerRef.current.children) {
                 if (item) {
                     item.classList.remove('show-modal')
@@ -31,6 +31,7 @@ const Portal = ({show, children, onClose, modalTitle, smModal = false, lockBodyS
 
     const handleDragEnd = (event) => {
         event.preventDefault();
+
         if (window.innerWidth < 767) {
             const {clientY, pageX} = event.changedTouches[0];
             const contentHeight = contentRef.current.clientHeight;
@@ -106,14 +107,16 @@ const Portal = ({show, children, onClose, modalTitle, smModal = false, lockBodyS
                             <span className="rmc-header-close-line"/>
 
                             <button className="rmc-header-close" onClick={(e) => handleClose(e)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.89 11.89">
-                                    <g id="Layer_2" data-name="Layer 2">
-                                        <g id="Layer_2-2" data-name="Layer 2">
-                                            <line x1="0.53" y1="0.53" x2="11.36" y2="11.36" fill="none" stroke="#222" stroke-linejoin="round" stroke-width="1.5"/>
-                                            <line x1="11.36" y1="0.53" x2="0.53" y2="11.36" fill="none" stroke="#222" stroke-linejoin="round" stroke-width="1.5"/>
+                                <i className="">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11.89 11.89">
+                                        <g id="Layer_2" data-name="Layer 2">
+                                            <g id="Layer_2-2" data-name="Layer 2">
+                                                <line x1="0.53" y1="0.53" x2="11.36" y2="11.36" fill="none" stroke="#222" stroke-linejoin="round" stroke-width="1.5"/>
+                                                <line x1="11.36" y1="0.53" x2="0.53" y2="11.36" fill="none" stroke="#222" stroke-linejoin="round" stroke-width="1.5"/>
+                                            </g>
                                         </g>
-                                    </g>
-                                </svg>
+                                    </svg>
+                                </i>
                             </button>
 
                             <h4 className="rmc-title">{modalTitle}</h4>
@@ -137,6 +140,11 @@ function Modal(props) {
     if (props.show) {
         return <Portal {...props}/>
     } else {
+        useEffect(() => {
+            const root = document.getElementsByTagName('html')[0];
+            root.classList.remove('html-modal-open');
+        }, []);
+
         return '';
     }
 }
