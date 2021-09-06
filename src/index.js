@@ -64,12 +64,16 @@ const Portal = ({show, children, onClose, modalTitle, smModal = false, lockBodyS
     };
 
     useEffect(() => {
-        headerRef.current.addEventListener('touchend', handleDragEnd, false);
-        headerRef.current.addEventListener('touchmove', handleDrag, false);
+        if (headerRef.current) {
+            headerRef.current.addEventListener('touchend', handleDragEnd, false);
+            headerRef.current.addEventListener('touchmove', handleDrag, false);
+        }
 
         return () => {
-            headerRef.current.removeEventListener('touchend', handleDrag);
-            headerRef.current.removeEventListener('touchmove', handleDrag);
+            if (headerRef.current) {
+                headerRef.current.removeEventListener('touchend', handleDrag);
+                headerRef.current.removeEventListener('touchmove', handleDrag);
+            }
         };
     }, []);
 
