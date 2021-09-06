@@ -48,7 +48,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-scripts": "^3.4.1",
-    "sass": "^1.32.4"
+    "sass": "^1.32.4",
+    "webpack": "4.42.0"
   },
   "files": [
     "dist"
