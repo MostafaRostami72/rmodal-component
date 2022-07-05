@@ -1,6 +1,6 @@
 {
   "name": "rmodal-component",
-  "version": "2.2.0",
+  "version": "2.3.0",
   "description": "React Modal Component (draggable drawer in mobile devices)",
   "author": "MostafaRostami72",
   "license": "MIT",
@@ -11,9 +11,12 @@
   "engines": {
     "node": ">=10"
   },
+  "types": "dist/rmodal-component.d.ts",
   "scripts": {
-    "build": "microbundle-crl --css-modules false --format modern,cjs",
+    "build": "npm-run-all build2 copy:types",
+    "build2": "microbundle-crl --css-modules false --format modern,cjs",
     "start": "microbundle-crl watch --no-compress --css-modules false --format modern,cjs",
+    "copy:types": "cp ./rmodal-component.d.ts ./dist --parents",
     "prepare": "run-s build",
     "test": "run-s test:unit test:lint test:build",
     "test:build": "run-s build",
